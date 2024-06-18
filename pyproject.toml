@@ -1,0 +1,193 @@
+[tool.poetry]
+name = "overwatch_sayak"
+version = "1.0.3"
+description = "A set of easy-to-use utilities that will come in handy in a Computer Vision project"
+authors = ["Sayak Dutta <sayakdutta1002@gmail.com>"]
+maintainers = ["Sayak Dutta <sayakdutta1002@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+packages = [{include = "overwatch_sayak"}]
+homepage = "https://github.com/itz-sayak/overwatch_sayak"
+repository = "https://github.com/itz-sayak/overwatch_sayak"
+documentation = "https://github.com/itz-sayak/overwatch_sayak/blob/main/README.md"
+keywords = ["machine-learning", "deep-learning", "vision", "ML", "DL", "AI", "Computer Vision", "Slided Inference"]
+
+classifiers=[
+    'Development Status :: 4 - Beta',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Education',
+    'Intended Audience :: Science/Research',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3 :: Only',
+    'Topic :: Software Development',
+    'Topic :: Scientific/Engineering',
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    'Typing :: Typed',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: POSIX :: Linux',
+    'Operating System :: MacOS'
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = ">=1.21.2"
+scipy = [
+    { version = "1.10.0", python = "<3.9" },
+    { version = "^1.10.0", python = ">=3.9" }
+]
+matplotlib = ">=3.6.0"
+pyyaml = ">=5.3"
+defusedxml = "^0.7.1"
+opencv-python = { version = ">=4.5.5.64", optional = true }
+opencv-python-headless = ">=4.5.5.64"
+requests = { version = ">=2.26.0,<=2.32.3", optional = true }
+tqdm = { version = ">=4.62.3,<=4.66.4", optional = true }
+pillow = ">=9.4"
+
+[tool.poetry.extras]
+desktop = ["opencv-python"]
+assets = ["requests","tqdm"]
+
+[tool.poetry.group.dev.dependencies]
+twine = ">=4.0.2,<6.0.0"
+pytest = ">=7.2.2,<9.0.0"
+wheel = ">=0.40,<0.44"
+build = ">=0.10,<1.3"
+ruff = ">=0.1.0"
+mypy = "^1.4.1"
+pre-commit = "^3.3.3"
+tox = "^4.11.4"
+notebook = ">=6.5.3,<8.0.0"
+ipywidgets = "^8.1.1"
+jupytext = "^1.16.1"
+nbconvert = "^7.14.2"
+
+
+[tool.poetry.group.docs.dependencies]
+mkdocs-material = {extras = ["imaging"], version = "^9.5.5"}
+mkdocstrings = {extras = ["python"], version = ">=0.20,<0.26"}
+mike = "^2.0.0"
+# For Documentation Development use Python 3.10 or above
+# Use Latest mkdocs-jupyter min 0.24.6 for Jupyter Notebook Theme support
+mkdocs-jupyter = "^0.24.3"
+mkdocs-git-committers-plugin-2 = "^2.2.3"
+mkdocs-git-revision-date-localized-plugin = "^1.2.4"
+
+
+
+[tool.isort]
+line_length = 88
+profile = "black"
+
+[tool.bandit]
+target = ["test", "overwatch_sayak"]
+tests = ["B201", "B301", "B318", "B314", "B303", "B413", "B412", "B410"]
+
+[tool.autoflake]
+check = true
+imports = ["cv2", "overwatch_sayak"]
+
+
+[tool.black]
+target-version = ["py38"]
+line-length = 88
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | docs
+)/
+'''
+
+[tool.ruff]
+target-version = "py38"
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "yarn-error.log",
+    "yarn.lock",
+    "docs",
+]
+
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+select = ["E", "F"]
+ignore = []
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
+unfixable = []
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+pylint.max-args = 20
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "double"
+multiline-quotes = "double"
+docstring-quotes = "double"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402","F401"]
+
+[tool.ruff.lint.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 5.
+max-complexity = 20
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+exclude = ["docs*", "test*","examples*"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
